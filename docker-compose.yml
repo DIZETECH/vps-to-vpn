@@ -3,7 +3,7 @@ version: "3.8"
 services:
   ipsec-vpn:
     image: hwdsl2/ipsec-vpn-server:latest
-    container_name: ipsec-vpn-server
+    container_name: vps-to-vpn
     restart: unless-stopped
 
     privileged: true
