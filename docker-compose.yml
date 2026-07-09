@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  ipsec-vpn:
+    image: hwdsl2/ipsec-vpn-server:latest
+    container_name: ipsec-vpn-server
+    restart: unless-stopped
+
+    privileged: true
+
+    ports:
+      - "500:500/udp"
+      - "4500:4500/udp"
+
+    volumes:
+      - /lib/modules:/lib/modules:ro
+
+    environment:
+      VPN_SERVER_IP: ${VPN_SERVER_IP}
+      VPN_USER: ${VPN_USER}
+      VPN_PASSWORD: ${VPN_PASSWORD}
+      VPN_IPSEC_PSK: ${VPN_IPSEC_PSK}
+
+    cap_add:
+      - NET_ADMIN
+
+    sysctls:
+      net.ipv4.ip_forward: "1"
+      net.ipv6.conf.all.disable_ipv6: "0"
